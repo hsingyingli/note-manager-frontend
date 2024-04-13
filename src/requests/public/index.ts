@@ -26,7 +26,8 @@ export const registerUser = ({ username, email, password }: RegisterUserParam) =
 
 export const logoutUser = () => axios({
   url: '/api/v1/user/logout',
-  method: 'POST'
+  method: 'POST', 
+  withCredentials: true,
 })
 
 
