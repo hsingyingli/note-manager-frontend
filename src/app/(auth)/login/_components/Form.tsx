@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+
 import * as z from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -15,16 +16,20 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { emailValidation, passwordValidation } from "@/lib/validation"
-
-
-
+import { LoginUserParam } from "@/requests/public"
 
 const formSchema = z.object({
   email: emailValidation,
   password: passwordValidation
 })
 
-const LoginForm = () => {
+interface Props {
+  handleOnLogin: (param: LoginUserParam) => Promise<void>
+  disabled: boolean
+}
+
+const LoginForm: React.FC<Props> = ({handleOnLogin, disabled}) => {
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,9 +39,8 @@ const LoginForm = () => {
     },
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  const onSubmit =  (values: z.infer<typeof formSchema>) => {
+    handleOnLogin(values)
   }
 
   return (
@@ -68,7 +72,7 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button disabled={disabled} type="submit">Submit</Button>
       </form>
     </Form>
   )
