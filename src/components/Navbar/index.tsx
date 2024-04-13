@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import ThemeSwitcher from './ThemeSwitcher'
+import UserDropDown from '@/components/Navbar/UserDropDown'
+import ThemeSwitcher from '@/components/Navbar/ThemeSwitcher'
+
 
 const NavBar = () => {
   return (
@@ -15,8 +17,9 @@ const NavBar = () => {
           priority
         />
       </Link>
-      <div className='flex items-center'>
+      <div className='flex gap-1 items-center'>
         <ThemeSwitcher />
+        <UserDropDown />
       </div>
     </div>
   )
