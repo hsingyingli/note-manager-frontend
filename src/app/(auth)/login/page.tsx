@@ -8,13 +8,11 @@ import {
 } from "@/components/ui/card"
 import LoginForm from "./_components/Form"
 
-import { useRouter } from 'next/navigation'
 import { useToast } from "@/components/ui/use-toast"
 import { useMutation } from '@tanstack/react-query'
 import { LoginUserParam, loginUser } from "@/requests/public"
 
 const LoginPage = () => {
-  const router = useRouter()
   const { toast } = useToast()
   const { mutate, isPending} = useMutation({
     mutationFn: loginUser,
@@ -23,7 +21,7 @@ const LoginPage = () => {
         description: "Login Successfully",
         duration: 5000,
       })
-      router.push("/")
+      window.location.href = "/"
     },
     onError: ()=> {
       toast({
